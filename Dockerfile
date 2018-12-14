@@ -8,7 +8,11 @@ RUN apt-get update && apt-get -y install \
   libfontconfig1 \
   mysql-client \
   tzdata \
+  chromium-browser \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Alias chromium
+RUN ln -s /usr/bin/chromium-browser /usr/bin/chromium
 
 # Give children processes 1 minute to timeout
 ENV KILL_PROCESS_TIMEOUT=60
@@ -79,8 +83,8 @@ RUN echo "looker     soft     nofile     4096\nlooker     hard     nofile     40
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 COPY \
-  templates/provision.yml \
-  templates/lookerstart.cfg \
+  #templates/provision.yml \
+  #templates/lookerstart.cfg \
   templates/looker_jar_loc.txt \
   $APP_HOME/
 
